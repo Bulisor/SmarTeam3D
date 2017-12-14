@@ -1,1 +1,139 @@
-<!DOCTYPE html><html lang="en">	<head> 		<meta charset="utf-8">		<meta http-equiv="X-UA-Compatible" content="IE=edge">    				<title>SmarTeam3D - 3D world closer to you| SmarTeam3D</title>		<meta name="description" content="3D world closer to you | car/character customization,real reproduction of objects,from simple to complex animations,3D image and video rendering">		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />    		<meta name="keywords"  content="3d,webgl,rendering,animation,modeling, games" />				<link rel="apple-touch-icon" sizes="57x57" href="/assets/general/apple-icon-57x57.png">		<link rel="apple-touch-icon" sizes="60x60" href="/assets/general/apple-icon-60x60.png">		<link rel="apple-touch-icon" sizes="72x72" href="/assets/general/apple-icon-72x72.png">		<link rel="apple-touch-icon" sizes="76x76" href="/assets/general/apple-icon-76x76.png">		<link rel="apple-touch-icon" sizes="114x114" href="/assets/general/apple-icon-114x114.png">		<link rel="apple-touch-icon" sizes="120x120" href="/assets/general/apple-icon-120x120.png">		<link rel="apple-touch-icon" sizes="144x144" href="/assets/general/apple-icon-144x144.png">		<link rel="apple-touch-icon" sizes="152x152" href="/assets/general/apple-icon-152x152.png">		<link rel="apple-touch-icon" sizes="180x180" href="/assets/general/apple-icon-180x180.png">		<link rel="icon" type="image/png" sizes="192x192"  href="/assets/general/android-icon-192x192.png">		<link rel="icon" type="image/png" sizes="32x32" href="/assets/general/favicon-32x32.png">		<link rel="icon" type="image/png" sizes="96x96" href="/assets/general/favicon-96x96.png">		<link rel="icon" type="image/png" sizes="16x16" href="/assets/general/favicon-16x16.png">		<link rel="manifest" href="/assets/general/manifest.json">		<meta name="msapplication-TileColor" content="#ffffff">		<meta name="msapplication-TileImage" content="/assets/general/ms-icon-144x144.png">		<meta name="theme-color" content="#ffffff">		 		<script src="https://code.jquery.com/jquery.js"></script>  		<script src="https://d3js.org/d3.v4.min.js"></script>  		<script src="https://code.jquery.com/pep/0.4.3/pep.min.js"></script>  		<script src="/assets/homepage/babylon.v3.1-beta.min.js"></script> 		<script src="/assets/portfolio/3DScatterPlot/scatterPlot.js"></script>		<style>			html, body, p {				margin: 0;  				padding: 0;				overflow: hidden;			}			#webGLwarning{				display: none; position: absolute;font-weight: bold;z-index: 100;  left: 24.3em; color: white; top: 4px;			}			#loadingScene{				display: none; background-color:#000000; position: absolute; font-size:24px;z-index: 100; color: white; text-align:center;height: 60px;line-height:60px; width:50%;left:25%;border-radius:10px; top:2%; 			}			#canvas{				position:absolute; height:100%; width: 100%; background-color: rgba(255,255,255,0); z-index: 4; touch-action : none; -ms-touch-action : none; 			} 			#fpsLabel{				position:absolute; z-index:99;right:10px;top:10px; border-radius:7px; border:1.5px solid maroon;padding:5px;color:maroon;			}			.menu{				position:absolute; z-index:99;left:10px;top:10px; border-radius:7px; border:1.5px solid maroon;padding:5px;background:maroon;color:white;cursor:pointer;			}			.menu_box{				display:none;font-size:12px; position:absolute; z-index:99;left:10px;top:40px; border-radius:7px; border:1.5px solid maroon;padding:5px;background:maroon;color:white;cursor:pointer;			}			.about{				position:absolute; z-index:99;right:10px;bottom:10px; border-radius:7px; border:1.5px solid maroon;padding:5px;background:maroon;color:white;cursor:pointer;			}			.ui{				position:absolute; font-size:12px; z-index:99;left:48vw;bottom:10px; border-radius:7px; border:1.5px solid maroon;padding:5px;color:maroon;cursor:pointer;			}			.howTo{				position:absolute; z-index:99;left:10px;bottom:10px; border-radius:7px; border:1.5px solid maroon;background:maroon;color:white;padding: 5px;cursor:pointer;			}			.info2 a{				color:white;			}			.info, .info2{				display:none;font-size:12px; width:80vw; left:10vw; position:absolute; z-index:99;bottom:40px; border-radius:7px; border:1.5px solid maroon;padding:5px;background:maroon;color:white;			}			.home{				position:absolute; font-size:12px; z-index:99;left:46.5vw;top:10px; border-radius:7px; border:1.5px solid maroon;padding:5px;background:maroon;color:white;cursor:pointer;			}			.home a{				text-decoration:none;color:white;padding: 5px;			}			.menu_class {				padding: 3px;color:black; background-color:white;margin:0px 5px;border-radius:5px;font-size:14px;			}			.menu_class2 {				padding: 3px;color:black; background-color:white;margin:5px;border-radius:5px;			}			.selected{				background-color:black; color:white;			}			@media only screen and (min-width:768px) {				.ui,.info,.info2,.menu_box{					font-size:16px;				}				.home{					font-size:16px;left:47.5vw;				}			}		</style>	</head>	<body>		<div id="content"> 			<canvas id="canvas" style="touch-action:none" touch-action="none"></canvas>						<div id="webGLwarning">WebGL is not supported or it is disable on your browser! :(</div> 			<div id="loadingScene">Loading Scene...</div> 			<div class="ui">UI</div>			<div id="htmlUI" style="display: none;">				<div class="home"><a href="https://www.smarteam3d.com" target="_blank">Home</a></div>				<div id="fpsLabel"></div>				<div class="about">About</div>				<div class="info">					<p>Author: Marian Gaje</p>					<p>D3.js - https://d3js.org</p>					<p>Produced by: SmarTeam3D.com</p>					<p>Everything was possible with: BabylonJS - https://www.babylonjs.com</p>				</div>				<div class="howTo">Details</div>				<div class="info2">					<p style="font-weight:bold;">3D display of a csv data</p>					<br/> 					<p>The diagram represents the evolution of temperature in August, for the last 10 years. The data used is fictional.</p>					<p>Create your own 3D scatter plot <a href="https://playground.babylonjs.com/#AFGPGD#1" target="_blank">here.</a></p>				</div>				<div class="menu">Menu</div> 				<div class="menu_box">					<div style="display:inline-flex;">						<p>View :</p>						<div class="menu_class selected" id="lm_0">3D</div>						<div class="menu_class" id="lm_1">2D</div>						<div class="menu_class" id="lm_2">VR</div>					</div> 					<p>Draw options :</p>					<div class="menu_class2 selected" id="sp_0">plain color</div>					<div class="menu_class2" id="sp_1">3d objects</div>					<div class="menu_class2" id="sp_2">grid</div>					<div class="menu_class2" id="sp_3">flat shaded</div>				</div>			</div>	   		</div>     				<script src="/assets/portfolio/3DScatterPlot/main_10noobs.js"></script> 	</body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head> 
+		<title>SmarTeam3D | 3D World Closer To You</title>
+
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="">
+
+		<link rel="apple-touch-icon" sizes="57x57" href="/assets/main/fav/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/assets/main/fav/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/assets/main/fav/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/assets/main/fav/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/assets/main/fav/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/assets/main/fav/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/assets/main/fav/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/assets/main/fav/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/main/fav/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/assets/main/fav/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/main/fav/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/main/fav/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/main/fav/favicon-16x16.png">
+		<link rel="manifest" href="/assets/main/fav/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/assets/main/fav/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		
+		<script src="https://code.jquery.com/jquery.js"></script>  
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://code.jquery.com/pep/0.4.3/pep.min.js"></script>  
+		<script src="/assets/homepage/babylon.v3.1-beta.min.js"></script>  
+		<script src="/assets/portfolio/3DScatterPlot/scatterPlot.js"></script> 
+		  
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="/assets/portfolio/style.css" />
+		<style>
+			.view{
+				width:40px; display:block; margin:0px 5px; font-size:14px; border-radius:10px; background: rgba(200, 200, 200, .3); cursor:pointer; border:1px solid black;
+			}
+			.selected, .draw:hover, .view:hover{ background: rgba(20, 20, 20, .3)!important; color:white;
+			}
+			.draw{
+				width:100px; display:block; margin:5px 0px; font-size:14px; border-radius:10px; background: rgba(200, 200, 200, .3); cursor:pointer; border:1px solid black;
+			}
+		</style>
+	</head>  
+	<body>   
+		<canvas id="canvas" style="touch-action:none"></canvas>
+		<div id="fpsLabel"></div>
+		<div id="content" style="display:none;">
+			<div class="header_click" style="top:12px;">
+				<i class="fa fa-chevron-circle-right"></i>
+			</div>
+			<div class="top_banner">
+				<div class="topdivs1">
+					<img src="/assets/main/img/logo.png" alt="logo" height="40" width="160" style="margin:5px auto;display:block;"/>
+				</div>
+				<div class="topdivs2" style="text-align:center;">
+					<a href="https://www.smarteam3d.com" class="fa fa3 fa-home" title="Home"></a>
+					<i id="menu" class="fa fa3 fa-bars" title="Menu"></i>
+					<i id="info" class="fa fa3 fa-info-circle" title="Details"></i>
+					<i id="about" class="fa fa3 fa-question-circle" title="About"></i>
+					<i id="sound" class="fa fa3 fa-volume-up" title="Sound"></i> 
+					<i id="tablet" class="fa fa3 fa-tablet" title="Tablet"></i>
+					<i id="fullscreen" class="fa fa3 fa-expand" title="Fullscreen"></i>
+					<img id="vr" class="img_vr" src="/assets/main/img/vr.png" alt="vr" height="40" width="40" title="VR"/>
+				</div>
+				<div style="clear:both"></div>
+			</div> 
+			
+			<div class="footer_click" style="bottom:8px;">
+				<i class="fa fa-chevron-circle-right"></i>
+			</div>
+			<div class="bottom_banner">
+				<div class="topdivs2" style="text-align:center;">
+					Copyright &copy; SmarTeam3D 
+					<script> 
+					var year = new Date().getFullYear();
+					document.write(year); 
+					</script>
+				</div>
+				<div class="topdivs1">
+					<span>Follow Us:</span>
+					<a href="https://www.facebook.com/SmarTeam3D" class="fa fa4 fa-facebook" title="Facebook"></a>
+					<a href="https://www.youtube.com/channel/UC99BoLYeomoBYe_x4QhLNnw" class="fa fa4 fa-youtube-play" title="Youtube"></a>
+					<a href="https://twitter.com/SmarTeam3D" class="fa fa4 fa-twitter" title="Twitter"></a>
+				</div>
+			</div>
+			
+			<div class="menu">
+				<p>View:</p>
+				<p style="display:inline-flex;">
+					<span class="view selected" id="v_1">3D</span>
+					<span class="view" id="v_2">2D</span>
+				</p> 
+				<P>Draw options:</p>
+				<p class="draw selected" id="v_0">plain color</p>
+				<p class="draw" id="v_1">3d objects</p>
+				<p class="draw" id="v_2">grid</p> 
+				<p class="draw" id="v_3">flat shaded</p>
+			</div>
+			<div class="info">
+				<p><b>3D display of a csv data</b></p>
+				<br/>
+				<p>The diagram represents the evolution of temperature in August, for the last 10 years. The data used is fictional.</p>
+				<p>Create your own 3D scatter plot <a href="https://playground.babylonjs.com/#AFGPGD#1" target="_blank">here.</a></p>
+			</div>
+			<div class="about" style="right:0px;">
+				<p>Author: Marian Gaje</p>
+				<p>D3.js - https://d3js.org</p>
+				<p>Produced by: SmarTeam3D.com</p>
+				<p>Everything was possible with: BabylonJS - https://www.babylonjs.com</p>
+			</div>
+		</div>    
+		<div id="loader" style= "display:none;"> 
+			<img src="/assets/main/img/logo.png" alt="logo" style="display:block;"/>
+			<img src="/assets/homepage/loading.gif" alt="loading" style="display:block;"/>
+			<div class="follow">
+				<span>Follow Us:</span>
+				<a href="https://www.facebook.com/SmarTeam3D" class="fa fa2 fa-facebook" title="Facebook"></a>
+				<a href="https://www.youtube.com/channel/UC99BoLYeomoBYe_x4QhLNnw" class="fa fa2 fa-youtube-play" title="Youtube"></a>
+				<a href="https://twitter.com/SmarTeam3D" class="fa fa2 fa-twitter" title="Twitter"></a>
+			</div>
+		</div>
+		<div id="error" style= "display:none;"> 
+			<img src="/assets/main/img/logo.png" alt="logo"/>
+			<h2>WebGL is not supported or it is disable on your browser!:( Check <a href="http://webglreport.com/" target="_blank">here</a></h2>
+			<div class="follow">
+				<span>Follow Us:</span>
+				<a href="https://www.facebook.com/SmarTeam3D" class="fa fa2 fa-facebook" title="Facebook"></a>
+				<a href="https://www.youtube.com/channel/UC99BoLYeomoBYe_x4QhLNnw" class="fa fa2 fa-youtube-play" title="Youtube"></a>
+				<a href="https://twitter.com/SmarTeam3D" class="fa fa2 fa-twitter" title="Twitter"></a>
+			</div>
+		</div>   
+		 
+		<script src="/assets/portfolio/3DScatterPlot/main_10noobs.js"></script>    
+	</body>
+</html>
