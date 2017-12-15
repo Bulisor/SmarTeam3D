@@ -2,7 +2,7 @@
 var spheres = [],scales = [], GUI; var leftInPixels = -125;
 var index = 0, textures = [], sound;
 var path = "/assets/portfolio/effect/texture_min/"; 
-var background = ["SanFrancisco3/","Tenerife4/","SanFrancisco2/","NissiBeach2/","Lycksele/","CoitTower/","Sodermalmsallen2/"];
+var background = ["SanFrancisco3/","SanFrancisco2/","NissiBeach2/"];
 var skyboxMaterial, shapeMaterial;
 
 var scene, light, camera, camerado, cameravr, noRender = true;
