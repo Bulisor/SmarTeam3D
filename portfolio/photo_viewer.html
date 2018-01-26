@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head> 
-		<title>SmarTeam3D | 3D World Closer To You</title>
+		<title>SmarTeam3D - 360 Photo Viewer, device orientation, virtual reality | 3D World Closer To You</title>
 
 		<meta charset="utf-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,7 +26,7 @@
 		<meta name="msapplication-TileImage" content="/assets/main/fav/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 		
-		<script src="https://code.jquery.com/jquery.js"></script>  
+		<script src="https://code.jquery.com/jquery.min.js"></script>  
 		<script src="https://code.jquery.com/pep/0.4.3/pep.min.js"></script>  
 		<script src="/assets/libraries/babylon.v3.1.min.js"></script>  
 		<script src="/assets/libraries/babylon.gui.min.js"></script>  
@@ -41,6 +41,9 @@
 			}
 			.draw{
 				width:100px; display:block; margin:5px 0px; font-size:14px; border-radius:10px; background: rgba(200, 200, 200, .3); cursor:pointer; border:1px solid black;
+			}
+			#loading{
+				display: block;margin: 0 auto;line-height: 30px;border-radius: 5px;border: 1px solid black;margin-top: 36%;font-weight: bold;font-size: 18px;width: 190px;
 			}
 		</style>
 	</head>  
@@ -108,15 +111,23 @@
 				<p>For more beautifull places you should visit Romania</p>	
 			</div>
 			<div class="about" style="right:0px;">
-				<p>Author: Marian Gaje</p>
-				<p>Photographer: Andrei Zdetoveţchi - http://www.zdeto.eu  -  https://roundme.com/@zdeto</p>
-				<p>Produced by: SmarTeam3D.com</p>
-				<p>Everything was possible with: BabylonJS - https://www.babylonjs.com</p>
+				<p>
+					<span>Produced by:&nbsp;</span> 
+					<span style="float:right;"><a href="https://www.smarteam3d.com" target="_blank">SmarTeam3D</a></span>
+				</p>
+				<p>
+					<span>Photographer:&nbsp;</span>
+					<span style="float:right;"><a href="http://www.zdeto.eu" target="_blank">Andrei Zdetoveţchi</a></span> 
+				</p>
+				<p> 
+					<span>Powered by:&nbsp;</span>
+					<span style="float:right;"><a href="https://www.babylonjs.com" target="_blank">BabylonJS</a></span>
+				</p>
 			</div>
 		</div>    
 		<div id="loader" style= "display:none;"> 
 			<img src="/assets/main/img/logo.png" alt="logo" style="display:block;"/>
-			<img src="/assets/main/img/loading.gif" alt="loading" style="display:block;"/>
+			<div id="loading" style="display:block;"></div>
 			<div class="follow">
 				<span>Follow Us:</span>
 				<a href="https://www.facebook.com/SmarTeam3D" class="fa fa2 fa-facebook" title="Facebook"></a>
