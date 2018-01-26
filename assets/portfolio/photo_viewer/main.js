@@ -1,9 +1,9 @@
-
+ 
 var zooMobile = false, actualD, skyboxMaterial, SautoRot = false;
-var index = 5, textures = [], entries = [], sound, goToCircle;
+var index = 5, textures = [], entries = [], sound, progress = 0; 
 var path = "/assets/portfolio/photo_viewer/res/cave/";  
 
-var scene, light, camera, camerado, cameravr, noRender = true;
+var scene, light, camera, camerado, cameravr, sceneReady = false;
 var isMobile = false, Sfullscreen = false, Svr = false; Sdo = false;
 var Ssound = false, Smenu = false, Sinfo = false, Sabout = false;
 
@@ -33,15 +33,9 @@ function menu(){
 	showDivInfo("about", Sabout);
 	showDivInfo("info", Sinfo); 
 	
-	$("#vr").click(function(){
-		Svr = true;
-		engine.switchFullscreen(true); 
-		if(Smenu) Smenu = !Smenu;
-	});
 	$("#fullscreen").click(function(){
 		//true - no pointer, false - pointer
 		engine.switchFullscreen(true);
-		if(Smenu) Smenu = !Smenu;
 	});
 	$("#tablet").click(function(){
 		Sdo = !Sdo;
@@ -75,9 +69,7 @@ function menu(){
 	if(!sound){
 		$("#sound").css("color","#7a7a7a").css("cursor","auto");
 	}
-	if(!cameravr){
-		$("#vr").css("opacity","0.5").css("cursor","auto");
-	}
+	
 	if(isMobile){
 		if(window.innerWidth>window.innerHeight)
 			$(".menu").css("top", "50px");
@@ -116,31 +108,6 @@ function arrows(str1, str2, changeColor = false){
 	});
 }
 
-var screen_change_events = "webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange";
-$(document).on(screen_change_events, function () {
-	if(Sfullscreen) {
-		Sfullscreen = !Sfullscreen;
-		return;
-	}
-		
-	if(Svr){
-		scene.activeCamera.detachControl(canvas); 
-		cameravr.position = scene.activeCamera.position.clone();
-		scene.activeCamera = cameravr;
-		goToCircle.isVisible = true;
-		Svr = !Svr;
-	}else{
-		if(scene.activeCamera == cameravr){
-			if(Sdo && camerado)
-				scene.activeCamera = camerado; 
-			else
-				scene.activeCamera = camera; 
-			scene.activeCamera.attachControl(canvas, true);
-			goToCircle.isVisible = false;
-		} 
-	}
-});
-
 function create_scene(){
 	if (typeof(window.orientation) != "undefined") isMobile = true;
 	
@@ -150,12 +117,26 @@ function create_scene(){
 	scene = new BABYLON.Scene(engine);   
 	scene.clearColor = new BABYLON.Color4(1, 1, 1, 0); 
 	
+	var VRHelper = scene.createDefaultVRExperience({rayLength:1000, useCustomVRButton: true, customVRButton: document.getElementById("vr")});
+    VRHelper.enableInteractions();
+ 
+	VRHelper.onNewMeshSelected.add(function(mesh) {
+		if(mesh.index != null){
+			index = mesh.index;
+			setCamAnimation();
+		}
+	});
+
+	VRHelper.onExitingVR.add(function(){
+		VRHelper._deviceOrientationCamera = (Sdo == true && camerado) ? camerado : camera;
+	});
+	
 	//Adding a light 
 	light = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
-	light.diffuse = new BABYLON.Color3(1, 1, 1);
+	light.groundColor = new BABYLON.Color3(1, 1, 1);
 	light.shadowEnabled = false;
 	light.specular = new BABYLON.Color3(0, 0, 0);
-	
+	 
 	settingCameras();
 	
 	//cursorul - pt pc
@@ -165,58 +146,78 @@ function create_scene(){
 		scene.onPointerObservable.add(function (evt) {
 			if (evt.pickInfo.pickedMesh != null && evt.pickInfo.pickedMesh.index != null) { 
 				canvas.style.cursor = "pointer";  
-			}      
+				evt.pickInfo.pickedMesh.renderOutline = true;
+			}else{
+				for(var i=0;i<entries.length;i++){
+					for(var j=0;j<entries[i].length;j++){
+						entries[i][j].renderOutline = false;
+					}
+				}
+			}     
 		}, BABYLON.PointerEventTypes.POINTERMOVE);			
 	} 
 		
 	scene.onPointerDown = function (evt, pickResult) {
 		if (pickResult.hit && pickResult.pickedMesh!=null && pickResult.pickedMesh.index!=null) {
 			index = pickResult.pickedMesh.index;
-			setCamAnimation();
+			if(scene.activeCamera instanceof BABYLON.DeviceOrientationCamera)
+				setCamAnimation();
+			else
+				CamToTarget(pickResult.pickedMesh.position);
 		}
 	};
 	
 	scene.registerBeforeRender(function () {
-		if(SautoRot) scene.activeCamera.alpha+=0.001;
-		if(scene.activeCamera == cameravr) castRayAndSelectObject();  
+		if(SautoRot) scene.activeCamera.alpha+=0.001;  
 	});
 	
 	engine.runRenderLoop(function () {
-		if(noRender && scene.isReady()) {
-			document.getElementById("loader").style.display = "none";
-			document.getElementById("content").style.display = "block";
-			noRender = false;  
-		}
-		if(scene.isReady() && !noRender) { 
-			scene.render(); 
-			fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
-		}
+		if(scene){
+			if(sceneReady) { 
+				scene.render(); 
+				fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
+			}else{
+				var remaining = scene.getWaitingItemsCount();
+				
+				if (remaining === 0) { 
+					getBackground();
+
+					sceneReady = true;  
+					document.getElementById("loader").style.display = "none";
+					document.getElementById("content").style.display = "block";
+					return;
+				} 
+				
+				progress = parseInt((42 - remaining)*2.38);
+				loading(progress);
+			} 
+		} 
 	});
+	
+	for(var i=0;i<6;i++){
+		textures[i] = new BABYLON.CubeTexture(path+i, scene);
+	}
 	
 	create_Entries();
 		
 	skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-	getBackground();
 	
 	var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:1000.0}, scene);
 	skybox.material = skyboxMaterial;	
 	
 	skyboxMaterial.imageProcessingConfiguration.contrast = 1.4; 
 	skyboxMaterial.imageProcessingConfiguration.exposure = 1.4;
-	
-	createSliderOnBottom();
 		
 	menu();
 }
 
+/// Show progress 
+var loading = function(progress){
+	var div = document.getElementById("loading");
+	div.innerHTML = "Loading images: "+progress+"%";
+}
+
 function settingCameras(){
-	if (navigator.getVRDisplays)
-		cameravr = new BABYLON.WebVRFreeCamera("WebVRCamera", new BABYLON.Vector3(0, 1, 0), scene, false, { trackPosition: false });
-	else
-		cameravr = new BABYLON.VRDeviceOrientationFreeCamera("vrCam", new BABYLON.Vector3(0, 1, 0), scene);
-	cameravr.attachControl(canvas, false);
-	cameravr.keysUp = cameravr.keysDown = cameravr.keysLeft = cameravr.keysRight = [];
-	
 	if(isMobile){
 		camerado = new BABYLON.DeviceOrientationCamera("DevOr_camera", new BABYLON.Vector3(0, 10, 0), scene);
 		camerado.attachControl(canvas, false); 
@@ -234,120 +235,57 @@ function settingCameras(){
 	sound.setVolume(0.4);  
 }
 
+function CamToTarget(toTarget){
+	
+	scene.activeCamera.animations = [];
+	var animationCam = new BABYLON.Animation("animCam", "target", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+
+    var a = [];
+    a.push({ frame: 0, value: scene.activeCamera.target });
+    a.push({ frame: 30, value: toTarget });
+	animationCam.setKeys(a);
+    
+	var qe = new BABYLON.QuadraticEase;
+	qe.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+	animationCam.setEasingFunction(qe);
+		
+	scene.activeCamera.animations.push(animationCam); 
+	scene.beginAnimation(scene.activeCamera, 0, 30, false, 1.0, ()=>{
+		setCamAnimation();
+		scene.activeCamera.setTarget(BABYLON.Vector3.Zero());
+	});  
+}
+
 function setCamAnimation(){
-	if(scene.activeCamera!= cameravr){
-		scene.activeCamera.animations = [];
-		var animationCam = new BABYLON.Animation("Cinematique", "fov", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-		var a = [];
-		a.push({ 
-			frame : 0,
-			value : scene.activeCamera.fov  
-		}),
-		a.push({
-			frame : 15,
-			value : 0.1
-		}), 
-		a.push({
-			frame : 30, 
-			value : 1
-		});
-		animationCam.setKeys(a);
-		
-		var qe = new BABYLON.QuadraticEase;
-		qe.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-		animationCam.setEasingFunction(qe); 
+	scene.activeCamera.animations = [];
+	var animationCam = new BABYLON.Animation("Cinematique", "fov", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+	
+	var a = [];
+	a.push({ frame : 0,	value : 0.1 }),
+	a.push({ frame : 15, value : 1.4 });
+	animationCam.setKeys(a);
 
-		var anim2 = new BABYLON.AnimationEvent(14, function () { getBackground(); }, false);     
-		animationCam.addEvent(anim2);
-		
-		scene.activeCamera.animations.push(animationCam); 
-		scene.beginAnimation(scene.activeCamera, 0, 30, false);  
-	}else{
-		goToCircle.animations = [];
-		var animationCam = new BABYLON.Animation("Cinematique", "scaling", 30, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-		var a = [];
-		a.push({ 
-			frame : 0,
-			value : goToCircle.scaling
-		}),
-		a.push({
-			frame : 30, 
-			value : BABYLON.Vector3.One()
-		});
-		animationCam.setKeys(a);
-		
-		var qe = new BABYLON.QuadraticEase;
-		qe.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-		animationCam.setEasingFunction(qe); 
-
-		var anim2 = new BABYLON.AnimationEvent(30, function () { 
-			getBackground();
-			goToCircle.scaling = new BABYLON.Vector3(.5,.5,.5);
-		}, false);      
-		animationCam.addEvent(anim2);
-		 
-		goToCircle.animations.push(animationCam); 
-		scene.beginAnimation(goToCircle, 0, 30, false); 
-		
-	}
-}  
+	var qe = new BABYLON.QuadraticEase;
+	qe.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+	animationCam.setEasingFunction(qe);
+	
+	var anim2 = new BABYLON.AnimationEvent(0, function () { 
+		getBackground(); 
+	}, false);     
+	animationCam.addEvent(anim2);
+	
+	scene.activeCamera.animations.push(animationCam);
+	scene.beginAnimation(scene.activeCamera, 0, 15, false); 
+} 
  
-function createSliderOnBottom(){
-	
-	var planeBackground = BABYLON.Mesh.CreatePlane("plane", 1, scene);
-	planeBackground.isVisible = false;
-	planeBackground.parent = camera; 
-	if(isMobile){  
-		if(window.innerWidth<window.innerHeight){
-			planeBackground.scaling = new BABYLON.Vector3(0.5,0.5,1); 
-			planeBackground.position.y = -5; 
-		}else{ 
-			planeBackground.scaling = new BABYLON.Vector3(1,1,1); 
-			planeBackground.position.y = 0; 
-		}
-	} 
-	
-	for(var i=0;i<6;i++){
-		//deactivate bottom slider
-		//settingBottom(i, -14.7+i*5.9, planeBackground);
-	}
-	
-	var dlight = new BABYLON.DirectionalLight("Dir0", new BABYLON.Vector3(1, 1, 1), scene);
-	dlight.intensity = 2;
-	dlight.diffuse = new BABYLON.Color3(1, 1, 1);
-	dlight.shadowEnabled = false;
-	dlight.specular = new BABYLON.Color3(0, 0, 0);
-	dlight.parent = scene.activeCamera;
-}
-
-function settingBottom(index, positionX, parent){
-	var mon0 = BABYLON.Mesh.CreatePlane("plane", 5, scene);
-    mon0.position = new BABYLON.Vector3(positionX, -9.65, 25);
-	mon0.showBoundingBox = true;
-	
-	var planeTexture = new BABYLON.Texture(path+index+"-jos.jpg", scene);
-	planeTexture.hasAlpha = true;
-    var mon1mat = new BABYLON.StandardMaterial("texturePlane", scene);
-    mon1mat.diffuseTexture = planeTexture;
-    mon1mat.opacityTexture = planeTexture;
-	mon0.material = mon1mat;
-	mon0.scaling.y = 0.7;
-	mon0.parent = parent;
-	mon0.index = index;
-}
-
 function getBackground(){
-	if(typeof textures[index] == 'undefined'){
-		var defText = new BABYLON.CubeTexture(path+index, scene);
-		defText.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-		textures[index] = defText; 
-	}  
 	
-	skyboxMaterial.backFaceCulling = false;
 	skyboxMaterial.reflectionTexture = textures[index];
-	skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-	skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-	skyboxMaterial.disableLighting = true;
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.disableLighting = true;
+	skyboxMaterial.backFaceCulling = false;
 	
 	for(var i=0;i<entries.length;i++){
 		for(var j=0;j<entries[i].length;j++){
@@ -384,7 +322,6 @@ function create_Entries(){
 	var entr12 = setEntries(3, new BABYLON.Vector3(-100, 20, 450));
 	entries[5] = [entr11, entr12];
 
-	createTargetCircle();	
 }
 
 function setEntries(index, position){
@@ -401,6 +338,8 @@ function setEntries(index, position){
 	plane.material = planeMaterial;
 	plane.position = position;
 	plane.index = index;
+	plane.outlineColor = BABYLON.Color3.White();
+	plane.outlineWidth = 1;
 	
 	return plane;
 }
@@ -444,14 +383,13 @@ function orientationChange() {
 window.onorientationchange = orientationChange;
 
 var wheelit = function (e) {
-	var e = window.event || e; // old IE support
-	var delta = Math.max(-1, Math.min(1,(e.wheelDelta || -e.detail)));
+	var e = window.event || e; // old IE support 
+	var delta = Math.max(-1, Math.min(1,(-e.wheelDelta || e.detail)));
 
-	if (delta > 0  && scene.activeCamera.fov >= 1.4) return;
-	if (delta < 0  && scene.activeCamera.fov <= 0.6) return;
+	if (delta > 0  && scene.activeCamera.fov >= 1.8) return;
+	if (delta < 0  && scene.activeCamera.fov <= 0.8) return;
 	
 	scene.activeCamera.fov += delta * 0.1;   
-	//scene.activeCamera._children[0].position.z += -delta * 10 * 0.25/scene.activeCamera.fov;
 };
 
 canvas.addEventListener('mousewheel', wheelit, false);
@@ -461,7 +399,7 @@ canvas.addEventListener('touchstart', ts, false);
 canvas.addEventListener('touchmove', tm, false);
 canvas.addEventListener('touchend', te, false);
 
-function ts(e){
+function ts(e){ 
 	var ev = e.originalEvent || e;
 	if(ev.touches.length == 2) {
 		zooMobile = true;
@@ -483,58 +421,17 @@ function tm(e){
 		var delta = 1; 
 		if(parseFloat(dist-actualD)>0) delta = -1;
 		
-		if (delta > 0  && scene.activeCamera.fov >= 1.4) zooMobile = false;
-		if (delta < 0  && scene.activeCamera.fov <= 0.6) zooMobile = false;
-	
+		if (delta > 0  && scene.activeCamera.fov >= 1.8) zooMobile = false;
+		if (delta < 0  && scene.activeCamera.fov <= 0.8) zooMobile = false;
+	 
 		if(!zooMobile) return;
-		
-		scene.activeCamera.fov += delta * 2; 
-		//scene.activeCamera._children[0].position.z += -delta * 0.3/scene.activeCamera.fov;		
+		 
+		scene.activeCamera.fov += delta * 0.1; 
 	} 
 }
 
-function createTargetCircle() {
-    goToCircle = BABYLON.Mesh.CreateGround("goToCircle", 1, 1, 1, scene);
-	goToCircle.scaling = new BABYLON.Vector3(.5,.5,.5);
-	var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(goToCircle, 1024, 512);
-
-    var circle = new BABYLON.GUI.Ellipse();
-    circle.width = "150px";
-    circle.color = "orange";
-    circle.thickness = 50;
-    circle.height = "150px";
-    advancedTexture.addControl(circle);
-
-    goToCircle.isVisible = false;
-	goToCircle.rotation.x = Math.PI/2;
-	goToCircle.position.z = 5;  
-	goToCircle.parent = cameravr;
-};
-
-function castRayAndSelectObject() {
-	var ray = new BABYLON.Ray();
-    var rayHelper = new BABYLON.RayHelper(ray);
-    
-    var localMeshDirection = goToCircle.position;
-    var localMeshOrigin = cameravr.position; 
-    var length = 500; 
-          
-    rayHelper.attachToMesh(cameravr, localMeshDirection, localMeshOrigin, length);
-    //rayHelper.show(scene);
-	
-    var hits = scene.multiPickWithRay(ray);
-	if (hits){ 
-	   for (var i=0; i<hits.length; i++){
-		   if (hits[i].pickedMesh && hits[i].pickedMesh.index!=null) {
-				index = hits[i].pickedMesh.index; 
-				setCamAnimation(); 
-			}
-	   }
-	}
-} 
-	
 function te(e){
-	zooMobile = false;
+	zooMobile = false; 
 	actualD = 0;
 }
  
