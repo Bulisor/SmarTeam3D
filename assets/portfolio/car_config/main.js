@@ -158,7 +158,7 @@ function _init(){
 }  
   
 function importMesh(){   
-	BABYLON.SceneLoader.Append( "/assets/portfolio/car_config/Binary2/", "amg.binary.babylon", scene, function () {
+	BABYLON.SceneLoader.Append( "../assets/portfolio/car_config/Binary2/", "amg.binary.babylon", scene, function () {
 		
 		scene.executeWhenReady(function () {
 			car = scene.meshes[0];
