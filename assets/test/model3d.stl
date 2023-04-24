@@ -1,0 +1,860 @@
+solid battenModel0.2077386858960153
+	facet normal 0 1 0
+		outer loop
+			vertex 48 0.019999999552965164 0
+			vertex -48 0.019999999552965164 0
+			vertex -48 0.019999999552965164 200
+		endloop
+	endfacet
+	facet normal 0 1 0
+		outer loop
+			vertex 48 0.019999999552965164 0
+			vertex -48 0.019999999552965164 200
+			vertex 48 0.019999999552965164 200
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex 48 0 200
+			vertex -48 0 200
+			vertex -48 0 0
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex 48 0 200
+			vertex -48 0 0
+			vertex 48 0 0
+		endloop
+	endfacet
+	facet normal 0.9999999999999999 0 0
+		outer loop
+			vertex 48 0 200
+			vertex 48 0 0
+			vertex 48 0.019999999552965164 0
+		endloop
+	endfacet
+	facet normal 0.9999999999999999 0 0
+		outer loop
+			vertex 48 0 200
+			vertex 48 0.019999999552965164 0
+			vertex 48 0.019999999552965164 200
+		endloop
+	endfacet
+	facet normal -0.9999999999999999 0 0
+		outer loop
+			vertex -48 0.019999999552965164 200
+			vertex -48 0.019999999552965164 0
+			vertex -48 0 0
+		endloop
+	endfacet
+	facet normal -0.9999999999999999 0 0
+		outer loop
+			vertex -48 0.019999999552965164 200
+			vertex -48 0 0
+			vertex -48 0 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 0.019999999552965164 200
+			vertex -48 0 200
+			vertex 48 0 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 0.019999999552965164 200
+			vertex 48 0 200
+			vertex 48 0.019999999552965164 200
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 0.019999999552965164 0
+			vertex 48 0 0
+			vertex -48 0 0
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 0.019999999552965164 0
+			vertex -48 0 0
+			vertex -48 0.019999999552965164 0
+		endloop
+	endfacet
+endsolid battenModel0.2077386858960153
+solid battenModel0.9554470990545425
+	facet normal 0 1 0
+		outer loop
+			vertex -1 40 198
+			vertex -48 40 198
+			vertex -48 40 200
+		endloop
+	endfacet
+	facet normal 0 1 0
+		outer loop
+			vertex -1 40 198
+			vertex -48 40 200
+			vertex -1 40 200
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex -1 0 200
+			vertex -48 0 200
+			vertex -48 0 198
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex -1 0 200
+			vertex -48 0 198
+			vertex -1 0 198
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -1 0 200
+			vertex -1 0 198
+			vertex -1 40 198
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -1 0 200
+			vertex -1 40 198
+			vertex -1 40 200
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -48 40 200
+			vertex -48 40 198
+			vertex -48 0 198
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -48 40 200
+			vertex -48 0 198
+			vertex -48 0 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 40 200
+			vertex -48 0 200
+			vertex -1 0 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 40 200
+			vertex -1 0 200
+			vertex -1 40 200
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -1 40 198
+			vertex -1 0 198
+			vertex -48 0 198
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -1 40 198
+			vertex -48 0 198
+			vertex -48 40 198
+		endloop
+	endfacet
+endsolid battenModel0.9554470990545425
+solid battenModel0.9588953502465649
+	facet normal 0 1 0
+		outer loop
+			vertex 48 40 198
+			vertex 1 40 198
+			vertex 1 40 200
+		endloop
+	endfacet
+	facet normal 0 1 0
+		outer loop
+			vertex 48 40 198
+			vertex 1 40 200
+			vertex 48 40 200
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex 48 0 200
+			vertex 1 0 200
+			vertex 1 0 198
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex 48 0 200
+			vertex 1 0 198
+			vertex 48 0 198
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 48 0 200
+			vertex 48 0 198
+			vertex 48 40 198
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 48 0 200
+			vertex 48 40 198
+			vertex 48 40 200
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 1 40 200
+			vertex 1 40 198
+			vertex 1 0 198
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 1 40 200
+			vertex 1 0 198
+			vertex 1 0 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 1 40 200
+			vertex 1 0 200
+			vertex 48 0 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 1 40 200
+			vertex 48 0 200
+			vertex 48 40 200
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 40 198
+			vertex 48 0 198
+			vertex 1 0 198
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 40 198
+			vertex 1 0 198
+			vertex 1 40 198
+		endloop
+	endfacet
+endsolid battenModel0.9588953502465649
+solid battenModel0.30741397259528735
+	facet normal 0 1 0
+		outer loop
+			vertex -1 40 6
+			vertex -48 40 6
+			vertex -48 40 8
+		endloop
+	endfacet
+	facet normal 0 1 0
+		outer loop
+			vertex -1 40 6
+			vertex -48 40 8
+			vertex -1 40 8
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex -1 0 8
+			vertex -48 0 8
+			vertex -48 0 6
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex -1 0 8
+			vertex -48 0 6
+			vertex -1 0 6
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -1 0 8
+			vertex -1 0 6
+			vertex -1 40 6
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -1 0 8
+			vertex -1 40 6
+			vertex -1 40 8
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -48 40 8
+			vertex -48 40 6
+			vertex -48 0 6
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -48 40 8
+			vertex -48 0 6
+			vertex -48 0 8
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 40 8
+			vertex -48 0 8
+			vertex -1 0 8
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 40 8
+			vertex -1 0 8
+			vertex -1 40 8
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -1 40 6
+			vertex -1 0 6
+			vertex -48 0 6
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -1 40 6
+			vertex -48 0 6
+			vertex -48 40 6
+		endloop
+	endfacet
+endsolid battenModel0.30741397259528735
+solid battenModel0.9377764816650225
+	facet normal 0 1 0
+		outer loop
+			vertex 48 40 6
+			vertex 1 40 6
+			vertex 1 40 8
+		endloop
+	endfacet
+	facet normal 0 1 0
+		outer loop
+			vertex 48 40 6
+			vertex 1 40 8
+			vertex 48 40 8
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex 48 0 8
+			vertex 1 0 8
+			vertex 1 0 6
+		endloop
+	endfacet
+	facet normal 0 -1 0
+		outer loop
+			vertex 48 0 8
+			vertex 1 0 6
+			vertex 48 0 6
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 48 0 8
+			vertex 48 0 6
+			vertex 48 40 6
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 48 0 8
+			vertex 48 40 6
+			vertex 48 40 8
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 1 40 8
+			vertex 1 40 6
+			vertex 1 0 6
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 1 40 8
+			vertex 1 0 6
+			vertex 1 0 8
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 1 40 8
+			vertex 1 0 8
+			vertex 48 0 8
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 1 40 8
+			vertex 48 0 8
+			vertex 48 40 8
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 40 6
+			vertex 48 0 6
+			vertex 1 0 6
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 40 6
+			vertex 1 0 6
+			vertex 1 40 6
+		endloop
+	endfacet
+endsolid battenModel0.9377764816650225
+solid battenModel0.6962676107040655
+	facet normal 0 0 -1
+		outer loop
+			vertex -48 2.1316282072803006e-14 0
+			vertex -50 2.1316282072803006e-14 0
+			vertex -50 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -48 2.1316282072803006e-14 0
+			vertex -50 40.00000000000002 0
+			vertex -48 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 39.99999999999998 200
+			vertex -50 39.99999999999998 200
+			vertex -50 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -48 39.99999999999998 200
+			vertex -50 -2.1316282072803006e-14 200
+			vertex -48 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -48 39.99999999999998 200
+			vertex -48 -2.1316282072803006e-14 200
+			vertex -48 2.1316282072803006e-14 0
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -48 39.99999999999998 200
+			vertex -48 2.1316282072803006e-14 0
+			vertex -48 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -50 40.00000000000002 0
+			vertex -50 2.1316282072803006e-14 0
+			vertex -50 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -50 40.00000000000002 0
+			vertex -50 -2.1316282072803006e-14 200
+			vertex -50 39.99999999999998 200
+		endloop
+	endfacet
+	facet normal 0 1 2.1316282072803005e-16
+		outer loop
+			vertex -50 40.00000000000002 0
+			vertex -50 39.99999999999998 200
+			vertex -48 39.99999999999998 200
+		endloop
+	endfacet
+	facet normal 0 1 2.1316282072803005e-16
+		outer loop
+			vertex -50 40.00000000000002 0
+			vertex -48 39.99999999999998 200
+			vertex -48 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 -1 -2.1316282072803005e-16
+		outer loop
+			vertex -48 2.1316282072803006e-14 0
+			vertex -48 -2.1316282072803006e-14 200
+			vertex -50 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 0 -1 -2.1316282072803005e-16
+		outer loop
+			vertex -48 2.1316282072803006e-14 0
+			vertex -50 -2.1316282072803006e-14 200
+			vertex -50 2.1316282072803006e-14 0
+		endloop
+	endfacet
+endsolid battenModel0.6962676107040655
+solid battenModel0.9013315013454457
+	facet normal 0 0 -1
+		outer loop
+			vertex 50 2.1316282072803006e-14 0
+			vertex 48 2.1316282072803006e-14 0
+			vertex 48 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 50 2.1316282072803006e-14 0
+			vertex 48 40.00000000000002 0
+			vertex 50 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 50 39.99999999999998 200
+			vertex 48 39.99999999999998 200
+			vertex 48 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 50 39.99999999999998 200
+			vertex 48 -2.1316282072803006e-14 200
+			vertex 50 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 50 39.99999999999998 200
+			vertex 50 -2.1316282072803006e-14 200
+			vertex 50 2.1316282072803006e-14 0
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 50 39.99999999999998 200
+			vertex 50 2.1316282072803006e-14 0
+			vertex 50 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 48 40.00000000000002 0
+			vertex 48 2.1316282072803006e-14 0
+			vertex 48 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 48 40.00000000000002 0
+			vertex 48 -2.1316282072803006e-14 200
+			vertex 48 39.99999999999998 200
+		endloop
+	endfacet
+	facet normal 0 1 2.1316282072803005e-16
+		outer loop
+			vertex 48 40.00000000000002 0
+			vertex 48 39.99999999999998 200
+			vertex 50 39.99999999999998 200
+		endloop
+	endfacet
+	facet normal 0 1 2.1316282072803005e-16
+		outer loop
+			vertex 48 40.00000000000002 0
+			vertex 50 39.99999999999998 200
+			vertex 50 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 -1 -2.1316282072803005e-16
+		outer loop
+			vertex 50 2.1316282072803006e-14 0
+			vertex 50 -2.1316282072803006e-14 200
+			vertex 48 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 0 -1 -2.1316282072803005e-16
+		outer loop
+			vertex 50 2.1316282072803006e-14 0
+			vertex 48 -2.1316282072803006e-14 200
+			vertex 48 2.1316282072803006e-14 0
+		endloop
+	endfacet
+endsolid battenModel0.9013315013454457
+solid battenModel0.5745943522115811
+	facet normal 1 0 0
+		outer loop
+			vertex -1 37.00000000000001 0
+			vertex -1 39.00000000000001 0
+			vertex -1 39.00000000000001 6
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex -1 37.00000000000001 0
+			vertex -1 39.00000000000001 6
+			vertex -1 37.00000000000001 6
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -48 36.99999999999999 6
+			vertex -48 38.99999999999999 6
+			vertex -48 38.99999999999999 0
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -48 36.99999999999999 6
+			vertex -48 38.99999999999999 0
+			vertex -48 36.99999999999999 0
+		endloop
+	endfacet
+	facet normal 3.0235861096174475e-16 -1 0
+		outer loop
+			vertex -48 36.99999999999999 6
+			vertex -48 36.99999999999999 0
+			vertex -1 37.00000000000001 0
+		endloop
+	endfacet
+	facet normal 3.0235861096174475e-16 -1 0
+		outer loop
+			vertex -48 36.99999999999999 6
+			vertex -1 37.00000000000001 0
+			vertex -1 37.00000000000001 6
+		endloop
+	endfacet
+	facet normal -3.0235861096174475e-16 1 0
+		outer loop
+			vertex -1 39.00000000000001 6
+			vertex -1 39.00000000000001 0
+			vertex -48 38.99999999999999 0
+		endloop
+	endfacet
+	facet normal -3.0235861096174475e-16 1 0
+		outer loop
+			vertex -1 39.00000000000001 6
+			vertex -48 38.99999999999999 0
+			vertex -48 38.99999999999999 6
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -1 39.00000000000001 6
+			vertex -48 38.99999999999999 6
+			vertex -48 36.99999999999999 6
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex -1 39.00000000000001 6
+			vertex -48 36.99999999999999 6
+			vertex -1 37.00000000000001 6
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -1 37.00000000000001 0
+			vertex -48 36.99999999999999 0
+			vertex -48 38.99999999999999 0
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex -1 37.00000000000001 0
+			vertex -48 38.99999999999999 0
+			vertex -1 39.00000000000001 0
+		endloop
+	endfacet
+endsolid battenModel0.5745943522115811
+solid battenModel0.5733581666765415
+	facet normal 1 0 0
+		outer loop
+			vertex 48 37.00000000000001 0
+			vertex 48 39.00000000000001 0
+			vertex 48 39.00000000000001 6
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 48 37.00000000000001 0
+			vertex 48 39.00000000000001 6
+			vertex 48 37.00000000000001 6
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 1 36.99999999999999 6
+			vertex 1 38.99999999999999 6
+			vertex 1 38.99999999999999 0
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex 1 36.99999999999999 6
+			vertex 1 38.99999999999999 0
+			vertex 1 36.99999999999999 0
+		endloop
+	endfacet
+	facet normal 3.0235861096174475e-16 -1 0
+		outer loop
+			vertex 1 36.99999999999999 6
+			vertex 1 36.99999999999999 0
+			vertex 48 37.00000000000001 0
+		endloop
+	endfacet
+	facet normal 3.0235861096174475e-16 -1 0
+		outer loop
+			vertex 1 36.99999999999999 6
+			vertex 48 37.00000000000001 0
+			vertex 48 37.00000000000001 6
+		endloop
+	endfacet
+	facet normal -3.0235861096174475e-16 1 0
+		outer loop
+			vertex 48 39.00000000000001 6
+			vertex 48 39.00000000000001 0
+			vertex 1 38.99999999999999 0
+		endloop
+	endfacet
+	facet normal -3.0235861096174475e-16 1 0
+		outer loop
+			vertex 48 39.00000000000001 6
+			vertex 1 38.99999999999999 0
+			vertex 1 38.99999999999999 6
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 48 39.00000000000001 6
+			vertex 1 38.99999999999999 6
+			vertex 1 36.99999999999999 6
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 48 39.00000000000001 6
+			vertex 1 36.99999999999999 6
+			vertex 48 37.00000000000001 6
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 37.00000000000001 0
+			vertex 1 36.99999999999999 0
+			vertex 1 38.99999999999999 0
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 48 37.00000000000001 0
+			vertex 1 38.99999999999999 0
+			vertex 48 39.00000000000001 0
+		endloop
+	endfacet
+endsolid battenModel0.5733581666765415
+solid battenModel0.17453791827120435
+	facet normal 0 0 -1
+		outer loop
+			vertex 1 2.1316282072803006e-14 0
+			vertex -1 2.1316282072803006e-14 0
+			vertex -1 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 0 -1
+		outer loop
+			vertex 1 2.1316282072803006e-14 0
+			vertex -1 40.00000000000002 0
+			vertex 1 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 1 39.99999999999998 200
+			vertex -1 39.99999999999998 200
+			vertex -1 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 0 0 1
+		outer loop
+			vertex 1 39.99999999999998 200
+			vertex -1 -2.1316282072803006e-14 200
+			vertex 1 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 1 39.99999999999998 200
+			vertex 1 -2.1316282072803006e-14 200
+			vertex 1 2.1316282072803006e-14 0
+		endloop
+	endfacet
+	facet normal 1 0 0
+		outer loop
+			vertex 1 39.99999999999998 200
+			vertex 1 2.1316282072803006e-14 0
+			vertex 1 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -1 40.00000000000002 0
+			vertex -1 2.1316282072803006e-14 0
+			vertex -1 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal -1 0 0
+		outer loop
+			vertex -1 40.00000000000002 0
+			vertex -1 -2.1316282072803006e-14 200
+			vertex -1 39.99999999999998 200
+		endloop
+	endfacet
+	facet normal 0 1 2.1316282072803005e-16
+		outer loop
+			vertex -1 40.00000000000002 0
+			vertex -1 39.99999999999998 200
+			vertex 1 39.99999999999998 200
+		endloop
+	endfacet
+	facet normal 0 1 2.1316282072803005e-16
+		outer loop
+			vertex -1 40.00000000000002 0
+			vertex 1 39.99999999999998 200
+			vertex 1 40.00000000000002 0
+		endloop
+	endfacet
+	facet normal 0 -1 -2.1316282072803005e-16
+		outer loop
+			vertex 1 2.1316282072803006e-14 0
+			vertex 1 -2.1316282072803006e-14 200
+			vertex -1 -2.1316282072803006e-14 200
+		endloop
+	endfacet
+	facet normal 0 -1 -2.1316282072803005e-16
+		outer loop
+			vertex 1 2.1316282072803006e-14 0
+			vertex -1 -2.1316282072803006e-14 200
+			vertex -1 2.1316282072803006e-14 0
+		endloop
+	endfacet
+endsolid battenModel0.17453791827120435
