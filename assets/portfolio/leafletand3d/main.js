@@ -1,4 +1,3 @@
-
 var progress = 0, sceneReady = false, scene, area = [], GUI, marker = null, map;
 var KINEMATICModeCamera, camera, camerado, sound, cameravr, beginAnimation = false;
 var posTarget = new BABYLON.Vector3(-75, 50, -105); 

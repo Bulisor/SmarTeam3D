@@ -158,7 +158,7 @@ function _init(){
 }  
   
 function importMesh(){   
-	BABYLON.SceneLoader.Append( "/assets/portfolio/car_config/Binary2/", "amg.binary.babylon", scene, function () {
+	BABYLON.SceneLoader.Append( "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/Binary2/", "amg.binary.babylon", scene, function () {
 		
 		scene.executeWhenReady(function () {
 			car = scene.meshes[0];
@@ -185,7 +185,7 @@ function importMesh(){
 				} 
 				
 				//metal
-				var hdrTexture = new BABYLON.HDRCubeTexture("/assets/portfolio/car_config/res/txt.hdr", scene, 512);
+				var hdrTexture = new BABYLON.HDRCubeTexture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/txt.hdr", scene, 512);
 				var metal = new BABYLON.PBRMaterial("metal", scene);
 				metal.reflectionTexture = hdrTexture;
 				metal.environmentIntensity = 2;
@@ -273,7 +273,7 @@ function importMesh(){
 			ground.position.y = -28.3; 
 			ground.scaling.y = 0.25;  
 			var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
-			groundMaterial.diffuseTexture = new BABYLON.Texture("/assets/portfolio/car_config/res/logo.png", scene);
+			groundMaterial.diffuseTexture = new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/logo.png", scene);
 			groundMaterial.diffuseTexture.hasAlpha = true;  		
 			groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
 			ground.material = groundMaterial; 
@@ -282,12 +282,12 @@ function importMesh(){
 			setKinematicAnimation();  
 			    
 			decalTextures.push( 
-				new BABYLON.Texture("/assets/portfolio/car_config/res/image.png", scene),
-				new BABYLON.Texture("/assets/portfolio/car_config/res/image (1).png", scene),
-				new BABYLON.Texture("/assets/portfolio/car_config/res/image (2).png", scene),
-				new BABYLON.Texture("/assets/portfolio/car_config/res/image (3).png", scene),
-				new BABYLON.Texture("/assets/portfolio/car_config/res/image (4).png", scene),
-				new BABYLON.Texture("/assets/portfolio/car_config/res/image (5).png", scene) 
+				new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image.png", scene),
+				new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image (1).png", scene),
+				new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image (2).png", scene),
+				new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image (3).png", scene),
+				new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image (4).png", scene),
+				new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image (5).png", scene) 
 			);
 			
 			setting_sounds();
@@ -662,7 +662,7 @@ function addGUI(){
 		UIMob.addControl(mainBlock); 
 
 		
-		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "/assets/portfolio/car_config/res/arrowKeys_up.png");
+		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/arrowKeys_up.png");
 		elem_setting(14, button); 
 		button.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 		button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
@@ -676,7 +676,7 @@ function addGUI(){
 		mainBlock.addControl(button); 
 		
 		
-		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "/assets/portfolio/car_config/res/arrowKeys_left.png");
+		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/arrowKeys_left.png");
 		elem_setting(14, button);
 		button.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 		button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
@@ -690,7 +690,7 @@ function addGUI(){
 		mainBlock.addControl(button);  
 		
 		
-		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "/assets/portfolio/car_config/res/arrowKeys_right.png");
+		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/arrowKeys_right.png");
 		elem_setting(14, button);
 		button.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 		button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
@@ -704,7 +704,7 @@ function addGUI(){
 		mainBlock.addControl(button);   
 		
 		
-		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "/assets/portfolio/car_config/res/arrowKeys_down.png");
+		var button = BABYLON.GUI.Button.CreateImageOnlyButton("but", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/arrowKeys_down.png");
 		elem_setting(14, button);         
 		button.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER; 
 		button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM; 
@@ -797,7 +797,7 @@ function smoke(){
 	mesh1.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);        
 	 
 	var smokeSystem = new BABYLON.ParticleSystem("particles", 200, scene); 
-	smokeSystem.particleTexture = new BABYLON.Texture("/assets/portfolio/car_config/res/image.png", scene);
+	smokeSystem.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image.png", scene);
 	smokeSystem.emitter = mesh1; // the starting object, the emitter
     smokeSystem.minEmitBox = new BABYLON.Vector3(-1, 1, -1); // Starting all from
     smokeSystem.maxEmitBox = new BABYLON.Vector3(1, 1, 1); // To...
@@ -837,7 +837,7 @@ function smoke(){
 	mesh2.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);
 	   
 	var smokeSystem2 = new BABYLON.ParticleSystem("particles", 200, scene); 
-	smokeSystem2.particleTexture = new BABYLON.Texture("/assets/portfolio/car_config/res/image.png", scene);
+	smokeSystem2.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/image.png", scene);
 	smokeSystem2.emitter = mesh2; // the starting object, the emitter
     smokeSystem2.minEmitBox = new BABYLON.Vector3(-1, 1, -1); // Starting all from
     smokeSystem2.maxEmitBox = new BABYLON.Vector3(1, 1, 1); // To...
@@ -873,11 +873,11 @@ function smoke(){
 
 // ADD SOUNDS AND FUNCTIONALITY
 function setting_sounds(){
-	carStart = new BABYLON.Sound("carStart", "/assets/portfolio/car_config/res/CarStart.mp3", scene);
-	carHorn = new BABYLON.Sound("carHorn", "/assets/portfolio/car_config/res/CarHorn.mp3", scene);
+	carStart = new BABYLON.Sound("carStart", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/CarStart.mp3", scene);
+	carHorn = new BABYLON.Sound("carHorn", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/CarHorn.mp3", scene);
 	carStart.setVolume(0.3);
 	carHorn.setVolume(0.3);     
-	kinematicMusic = new BABYLON.Sound("kinematicMusic", "/assets/portfolio/car_config/res/Nintendo.mp3", scene, null, { loop: true });
+	kinematicMusic = new BABYLON.Sound("kinematicMusic", "https://raw.githubusercontent.com/Bulisor/SmarTeam3D/master/assets/portfolio/car_config/res/Nintendo.mp3", scene, null, { loop: true });
 	kinematicMusic.setVolume(0.1);      
 }   
 

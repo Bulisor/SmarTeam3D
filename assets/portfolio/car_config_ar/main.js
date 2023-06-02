@@ -1,6 +1,6 @@
 
 var isMobile = false, noRender = true, enableEffect = false, GUI, activateMD = false;
-var scene, light, ambientLight, camera, cameraView, videoTexture, video, backIndex = 1;
+var scene, light, ambientLight, camera, camera2, cameraView, videoTexture, video, backIndex = 1;
 var categ = ["door_lf", "door_rf", "boot", "bonnet"], autoRotate = true;
 var ground1, ground2, ground3, car, doors = [], cameras = [], camvideo;
 var openLdoor = false, openRdoor = false, openHood = false, openBags = false;
@@ -40,6 +40,11 @@ function _init(){
 
 		importMesh();       
 		
+		shadowmap = new BABYLON.ShadowGenerator(512, light)
+		shadowmap.useBlurExponentialShadowMap = true
+		shadowmap.blurKernel = 32
+		shadowmap.darkness = 0.6
+		
 		scene.registerBeforeRender(function() {  
 			if(enableEffect){
 				if(scene.fogDensity>0){   
@@ -49,9 +54,9 @@ function _init(){
 					enableEffect = !enableEffect;  
 				} 
 			}
-			if(autoRotate){
+			/*if(autoRotate){
 				camera.alpha += 0.001;
-			}
+			}*/
 		}); 
 
 		//click pe masina
@@ -130,10 +135,18 @@ function setting_cameras(){
 	scene.activeCamera.attachControl(canvas, false);  
 	
 	scene.cameraToUseForPointers = scene.activeCamera;
+	
+	camera2 = new BABYLON.DeviceOrientationCamera("DevOr_camera", new BABYLON.Vector3(0, 10, 0), scene);
+	camera2.attachControl(canvas, false); 
+	camera2.keysUp = camera2.keysDown = camera2.keysLeft = camera2.keysRight = [];
 }		 
-
+ 
 function importMesh(){   
 	BABYLON.SceneLoader.Append( "/assets/portfolio/car_config/Binary2/", "amg.binary.babylon", scene, function () {
+		
+		for (let i = 0; i < scene.meshes.length; i++) {
+			shadowmap.addShadowCaster(scene.meshes[i])
+		}
 		
 		scene.executeWhenReady(function () {
 			car = scene.meshes[0];
@@ -210,6 +223,12 @@ function importMesh(){
 			addVideo(); 
 			addGUI(); 
 			
+			const ground = BABYLON.Mesh.CreatePlane('ground', 500, scene)
+			ground.rotation.x = Math.PI / 2
+			ground.position.y = -30
+			ground.material = new BABYLON.ShadowOnlyMaterial('mat', scene)
+			ground.receiveShadows = true
+		
 			setTimeout(function(){ 
 				document.getElementById("loadingScene").style.display = "none"; 
 				document.getElementById("htmlUI").style.display = "block"; 
@@ -229,16 +248,23 @@ function background(param){
 	if(videoTexture) videoTexture.dispose();
 	stop();
 	
+	camera.upperBetaLimit = Math.PI/2; 
+	camera.lowerBetaLimit = -Math.PI/18;
+	scene.activeCamera.detachControl(canvas);
+	
 	switch(param){
-		case 1:
-			camera.upperBetaLimit = Math.PI/2; 
-			camera.lowerBetaLimit = -Math.PI/18;
+		case 1:			
+			scene.activeCamera = camera;   
+			scene.activeCamera.attachControl(canvas, false); 
 			break;
 		case 2:
+			scene.activeCamera = camera;   
+			scene.activeCamera.attachControl(canvas, false); 
+			
 			camera.upperBetaLimit = camera.lowerBetaLimit = Math.PI/2; 
 			if(!ground2){
 				ground2 = BABYLON.MeshBuilder.CreateBox("skyBox", {size:3000.0}, scene);
-				var defText = new BABYLON.CubeTexture("/assets/portfolio/car_config_ar/res/"+((isMobile)?"rsn":"rs"), scene);
+				var defText = new BABYLON.CubeTexture("/assets/portfolio/zoom3D/res/"+((isMobile)?"rsn":"rs"), scene);
 				defText.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 					
 				var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene); 
@@ -252,16 +278,19 @@ function background(param){
 			ground2.isVisible = true;
 			break;
 		case 3:
+			scene.activeCamera = camera;   
+			scene.activeCamera.attachControl(canvas, false); 
+			
 			camera.upperBetaLimit = camera.lowerBetaLimit = Math.PI/2; 
 			if(!ground3){
-				ground3 = new BABYLON.Layer("bg", "/assets/portfolio/car_config_ar/res/rs_nx.jpg", scene, true);
+				ground3 = new BABYLON.Layer("bg", "/assets/portfolio/zoom3D/res/rs_nx.jpg", scene, true);
 			}
 			ground3.scale = BABYLON.Vector2.One();
 			break;
 		case 4:
-			camera.upperBetaLimit = Math.PI/2; 
-			camera.lowerBetaLimit = -Math.PI/18;
-			
+			scene.activeCamera = camera2;   
+			scene.activeCamera.attachControl(canvas, false); 
+	
 			stopMD();
 			activateMD = false;
 			$("#motionD").css("background-color","maroon");
@@ -277,8 +306,8 @@ function background(param){
 			break;
 			
 		case 5:
-			camera.upperBetaLimit = Math.PI/2; 
-			camera.lowerBetaLimit = -Math.PI/18;
+			scene.activeCamera = camera2;   
+			scene.activeCamera.attachControl(canvas, false); 
 			
 			stopMD();
 			activateMD = false; 
@@ -299,8 +328,8 @@ function background(param){
 
 ///*** Video Camera functions ***///
 function addVideo(){
-	scene.environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("/assets/portfolio/car_config_ar/res/environment.dds", scene);
-		 
+	scene.environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("/assets/portfolio/zoom3D/res/environment.dds", scene);
+		
 	var myElem = document.getElementById('videoElement');
 	if (myElem === null) {    
 		var myLayer = document.createElement('video');
@@ -481,7 +510,7 @@ function addGUI(){
 			background(backIndex);
 		});
 	}
-
+	/*
 	var header2 = new BABYLON.GUI.TextBlock();  
     header2.text = "AutoRotation:";
 	setting_GUI(header2,2);
@@ -496,6 +525,7 @@ function addGUI(){
         autoRotate = value;
     });
     GUI.addControl(checkbox);
+	*/
 }	
 
 function setting_GUI(elem, param){
