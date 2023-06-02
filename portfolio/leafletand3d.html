@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head> 
+		<title>SmarTeam3D - 360 Photo Viewer, device orientation, virtual reality | 3D advertisement, 3D model viewer, 3D product configurators, virtual tours, virtual reality using WebVR, augmented reality using JSARToolKit, 360 photo viewer</title>
+
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="3D world closer to you | object/character customization, real reproduction of objects, from simple to complex animations, 3D image and video rendering, WebGl technology, augmented reality">
+		<meta name="keywords"  content="3d, webgl, rendering, 3d animation, 3d modeling, 3d games, WebGl, augmented reality, ar, virtual tour, 3d training, 3d video, 3d graphics">
+		
+		<link rel="apple-touch-icon" sizes="57x57" href="/assets/main/fav/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/assets/main/fav/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/assets/main/fav/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/assets/main/fav/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/assets/main/fav/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/assets/main/fav/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/assets/main/fav/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/assets/main/fav/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/main/fav/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/assets/main/fav/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/main/fav/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/main/fav/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/main/fav/favicon-16x16.png">
+		<link rel="manifest" href="/assets/main/fav/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/assets/main/fav/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		
+		<script src="https://code.jquery.com/jquery.min.js"></script>  
+		<script src="https://code.jquery.com/pep/0.4.3/pep.min.js"></script>  
+		<script src="/assets/libraries/babylon.v3.1.min.js"></script>  
+		<script src="/assets/libraries/babylon.gui.min.js"></script>  
+		 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="/assets/portfolio/style.css" />
+		<style>
+			.view{
+				width:40px; display:block; margin:0px 5px; font-size:14px; border-radius:10px; background: rgba(200, 200, 200, .3); cursor:pointer; border:1px solid black;
+			}
+			.selected, .draw:hover, .view:hover{ background: rgba(20, 20, 20, .3)!important; color:white;
+			}
+			.draw{
+				width:100px; display:block; margin:5px 0px; font-size:14px; border-radius:10px; background: rgba(200, 200, 200, .3); cursor:pointer; border:1px solid black;
+			}
+			#loading{
+				display: block;margin: 0 auto;line-height: 30px;border-radius: 5px;border: 1px solid black;margin-top: 36%;font-weight: bold;font-size: 18px;width: 190px;
+			}
+		</style>
+	</head>  
+	<body>  
+		<canvas id="canvas" style="touch-action:none"></canvas>
+		<div id="fpsLabel"></div>
+		<div id="content" style="display:none;">
+			<div class="header_click" style="top:12px;">
+				<i class="fa fa-chevron-circle-right"></i>
+			</div>
+			<div class="top_banner">
+				<div class="topdivs1">
+					<img src="/assets/main/img/logo.png" alt="logo" height="40" width="160" style="margin:5px auto;display:block;"/>
+				</div>
+				<div class="topdivs2" style="text-align:center;">
+					<a href="https://www.smarteam3d.com" class="fa fa3 fa-home" title="Home"></a>
+					<i id="menu" class="fa fa3 fa-bars" title="Menu"></i>
+					<i id="info" class="fa fa3 fa-info-circle" title="Details"></i>
+					<i id="about" class="fa fa3 fa-question-circle" title="About"></i>
+					<i id="sound" class="fa fa3 fa-volume-up" title="Sound"></i> 
+					<i id="tablet" class="fa fa3 fa-tablet" title="Tablet"></i>
+					<i id="fullscreen" class="fa fa3 fa-expand" title="Fullscreen"></i>
+					<img id="vr" class="img_vr" src="/assets/main/img/vr.png" alt="vr" height="40" width="40" title="VR"/>
+				</div>
+				<div style="clear:both"></div>
+			</div> 
+			
+			<div class="footer_click" style="bottom:8px;">
+				<i class="fa fa-chevron-circle-right"></i>
+			</div>
+			<div class="bottom_banner">
+				<div class="topdivs2" style="text-align:center;">
+					Copyright &copy; SmarTeam3D 
+					<script> 
+					var year = new Date().getFullYear();
+					document.write(year); 
+					</script>
+				</div>
+				<div class="topdivs1">
+					<span>Follow Us:</span>
+					<a href="https://www.facebook.com/SmarTeam3D" class="fa fa4 fa-facebook" title="Facebook"></a>
+					<a href="https://www.youtube.com/channel/UC99BoLYeomoBYe_x4QhLNnw" class="fa fa4 fa-youtube-play" title="Youtube"></a>
+					<a href="https://twitter.com/SmarTeam3D" class="fa fa4 fa-twitter" title="Twitter"></a>
+				</div>
+			</div>
+			
+			<div class="menu" style="text-align:left;">
+				<div>Choose coords</div>
+				<div>Long: <input type="text" id="long" name="input" value="" size="10"/></div>
+				<div>Lat:  <input type="text" id="lat" name="input" value="" size="10"/></div>
+				<div>Alt:  <input type="text" id="alt" name="input" value="" size="10"/></div>
+				<div> 
+					<span style="font-size:12px;">South: 29.5031</span>
+					<span style="font-size:12px;">North: 29.5055</span>
+				</div>
+				<div>
+					<span style="font-size:12px;">East: -98.5529</span>
+					<span style="font-size:12px;">West: -98.5548</span>
+				</div>
+				<div>
+					<span style="font-size:12px;">MinA: 267.0363</span>
+					<span style="font-size:12px;">MaxA: 295.6930</span>
+				</div>
+				<button onclick="goToPoint()">Go to</button> 
+				<div id="error2"></div>
+			</div>
+			<div class="info">
+				<p><b>3D object over 2d map</b></p>
+				<br/> 
+				<p>You can move the marker to a specific coords</p>
+				<p>You can rotate, pan and zoom to the object</p>
+			</div>
+			<div class="about" style="right:0px;">
+				<p>
+					<span>Produced by:&nbsp;</span> 
+					<span style="float:right;"><a href="https://www.smarteam3d.com" target="_blank">SmarTeam3D</a></span>
+				</p>
+				<p> 
+					<span>Powered by:&nbsp;</span>
+					<span style="float:right;"><a href="https://www.babylonjs.com" target="_blank">BabylonJS</a></span>
+				</p>
+			</div>
+		</div>    
+		<div id="loader" style= "display:none;"> 
+			<img src="/assets/main/img/logo.png" alt="logo" style="display:block;"/>
+			<div id="loading" style="display:block;"></div>
+			<div class="follow">
+				<span>Follow Us:</span>
+				<a href="https://www.facebook.com/SmarTeam3D" class="fa fa2 fa-facebook" title="Facebook"></a>
+				<a href="https://www.youtube.com/channel/UC99BoLYeomoBYe_x4QhLNnw" class="fa fa2 fa-youtube-play" title="Youtube"></a>
+				<a href="https://twitter.com/SmarTeam3D" class="fa fa2 fa-twitter" title="Twitter"></a>
+			</div>
+		</div>
+		<div id="error" style= "display:none;"> 
+			<img src="/assets/main/img/logo.png" alt="logo"/>
+			<h2>WebGL is not supported or it is disable on your browser!:( Check <a href="http://webglreport.com/" target="_blank">here</a></h2>
+			<div class="follow">
+				<span>Follow Us:</span>
+				<a href="https://www.facebook.com/SmarTeam3D" class="fa fa2 fa-facebook" title="Facebook"></a>
+				<a href="https://www.youtube.com/channel/UC99BoLYeomoBYe_x4QhLNnw" class="fa fa2 fa-youtube-play" title="Youtube"></a>
+				<a href="https://twitter.com/SmarTeam3D" class="fa fa2 fa-twitter" title="Twitter"></a>
+			</div>
+		</div>  
+	
+		<script src="/assets/portfolio/leafletand3d/main.js"></script>    
+</html>
